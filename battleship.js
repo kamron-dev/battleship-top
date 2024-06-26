@@ -2,12 +2,15 @@ const Ship = (length) => {
     return {
         length,
         timesHit: 0,
-        isSunk: false
+        isSunk: false,
+        hit: function () {
+            this.timesHit++;
+        },
     }
 };
 
-let ship = Ship(4);
 
-console.log(ship);
+
+
 
 module.exports = Ship;

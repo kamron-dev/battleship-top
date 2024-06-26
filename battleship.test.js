@@ -1,8 +1,14 @@
 const Ship = require("./battleship");
+const ship = Ship(4)
 
 test("Has the properties", () => {
-    const ship = Ship(4)
     
-    expect(Object.keys(ship)).toEqual(["length", "timesHit", "isSunk"]);
+    expect(Object.keys(ship)).toEqual(["length", "timesHit", "isSunk", "hit"]);
 });
 
+test("Ships take hits", () => {
+    ship.hit();
+    ship.hit();
+
+    expect(ship.timesHit).toBe(2);
+});
