@@ -12,3 +12,10 @@ test("Ships take hits", () => {
 
     expect(ship.timesHit).toBe(2);
 });
+
+test("Ships sink when all length hit", () => {
+    ship.hit();
+    ship.hit();
+
+    expect(ship.isSunk()).toBe(true);
+})

@@ -2,11 +2,13 @@ const Ship = (length) => {
     return {
         length,
         timesHit: 0,
-        isSunk: false,
+        isSunk: function () {
+            return this.timesHit === this.length ? true : false;
+        },
         hit: function () {
             this.timesHit++;
         },
-    }
+    };
 };
 
 
