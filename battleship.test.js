@@ -1,5 +1,5 @@
 const {Ship, GameBoard} = require("./battleship");
-//const GameBoard = require("./battleship");
+
 
 
 const ship = Ship(4);
@@ -24,9 +24,15 @@ test("Ships sink when all length hit", () => {
     expect(ship.isSunk()).toBe(true);
 });
 
-// test("Sets ships on board", () => {
-//     const newBoard = GameBoard();
-//     //newBoard.setShipOnBoard(0, "A", 2);
-//     //expect(newBoard[0]["A"]).toBeTruthy()
-//     expect(typeof newBoard).toEqual("object");
-// })
+test("Sets ships on board", () => {
+    const newBoard = GameBoard();
+    newBoard.setShipOnBoard(0, "A", 2);
+    expect(newBoard.ObjBoard[0]["A"]).toBeTruthy()
+    
+});
+
+test("Doesn't place ships on wrong coordinates", () => {
+    const newBoard = GameBoard();
+    expect(newBoard.setShipOnBoard(0, "Z", 2)).toBe(undefined);
+    
+});

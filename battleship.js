@@ -28,14 +28,22 @@ const GameBoard = () => {
     return {
         ObjBoard,
         setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize) {
-            ObjBoard[coordinateNum][coordinateLetter] = Ship(shipSize);
+            if (coordinateNum >= 0 && coordinateNum < 10 && letterCoordinates.includes(coordinateLetter)) {
+                ObjBoard[coordinateNum][coordinateLetter] = Ship(shipSize);
+
+            } else {
+                console.error("Wrong coordinates. Ship is not placed!");
+                return;
+            }
         }
     }
 };
 
 const board1 = GameBoard();
-// board1.setShipOnBoard(0, "B", 2);
-console.log(board1.ObjBoard);
+board1.setShipOnBoard(0, "A", 2);
+console.log(board1.ObjBoard[0]["A"]);
+
+//console.log(board1.ObjBoard);
 
 //console.table(board1.ObjBoard);
 // board1.ObjBoard[1].A = "Hey";
@@ -49,4 +57,3 @@ module.exports = {
     Ship,
     GameBoard
 };
-//module.exports = GameBoard;
