@@ -1,6 +1,9 @@
-const Ship = require("./battleship");
-const GameBoard = require("./battleship");
-const ship = Ship(4)
+const {Ship, GameBoard} = require("./battleship");
+//const GameBoard = require("./battleship");
+
+
+const ship = Ship(4);
+
 
 test("Has the properties", () => {
     
@@ -20,3 +23,10 @@ test("Ships sink when all length hit", () => {
 
     expect(ship.isSunk()).toBe(true);
 });
+
+// test("Sets ships on board", () => {
+//     const newBoard = GameBoard();
+//     //newBoard.setShipOnBoard(0, "A", 2);
+//     //expect(newBoard[0]["A"]).toBeTruthy()
+//     expect(typeof newBoard).toEqual("object");
+// })

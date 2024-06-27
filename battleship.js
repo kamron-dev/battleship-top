@@ -11,100 +11,49 @@ const Ship = (length) => {
     };
 };
 
-const GameBoard = (size = 10) => {
-    const board = [];
-    for (let i = 0; i < size; i++) {
-        board[i] = [];
-        for (let j = 0; j < size; j++) {
-            board[i][j] = [];
-        };
-    }
+const GameBoard = () => {
+    const ObjBoard = [];
+    const letterCoordinates = [
+        ["A", []],
+        ["B", []],
+        ["C", []],
+        ["D", []],
+        ["E", []],
+        ["F", []],
+        ["G", []],
+        ["H", []],
+        ["I", []],
+        ["J", []]
 
-    const ObjBoard = [
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        },
-        {
-            A: [], B: [],
-            C: [], D: [],
-            E: [], F: [],
-            G: [], H: [],
-            I: [], J: []
-        }
-    ]
+    ];
+    for (let i = 0; i < 10; i++) {
+        ObjBoard[i] = Object.fromEntries(letterCoordinates);
+        
+    };
+
+    
     return {
-        board,
-        ObjBoard
+        ObjBoard,
+        setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize) {
+            ObjBoard[coordinateNum][coordinateLetter] = Ship(shipSize);
+        }
     }
 };
 
 const board1 = GameBoard();
+board1.setShipOnBoard(0, "B", 2);
+console.log(board1.ObjBoard.length);
 
-board1.ObjBoard[1].A = "Hey";
-console.log(board1.ObjBoard);
+//console.table(board1.ObjBoard);
+// board1.ObjBoard[1].A = "Hey";
+// console.log(board1.ObjBoard);
 
 //console.log(board1.ObjBoard.length);
 
 
 
-module.exports = Ship;
+module.exports = {
+    Ship,
+    GameBoard
+};
+//module.exports = GameBoard;
