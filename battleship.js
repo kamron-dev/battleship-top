@@ -13,21 +13,14 @@ const Ship = (length) => {
 
 const GameBoard = () => {
     const ObjBoard = [];
-    const letterCoordinates = [
-        ["A", []],
-        ["B", []],
-        ["C", []],
-        ["D", []],
-        ["E", []],
-        ["F", []],
-        ["G", []],
-        ["H", []],
-        ["I", []],
-        ["J", []]
-
-    ];
+    const letterCoordinates = "ABCDEFGHIJ".split("");
     for (let i = 0; i < 10; i++) {
-        ObjBoard[i] = Object.fromEntries(letterCoordinates);
+        const row = {};
+        letterCoordinates.forEach(letter => {
+            row[letter] = []
+        })
+        ObjBoard[i] = row;
+        
         
     };
 
@@ -41,8 +34,8 @@ const GameBoard = () => {
 };
 
 const board1 = GameBoard();
-board1.setShipOnBoard(0, "B", 2);
-console.log(board1.ObjBoard.length);
+// board1.setShipOnBoard(0, "B", 2);
+console.log(board1.ObjBoard);
 
 //console.table(board1.ObjBoard);
 // board1.ObjBoard[1].A = "Hey";
