@@ -23,11 +23,12 @@ const GameBoard = () => {
         
         
     };
+    
 
     
     return {
         ObjBoard,
-        setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize) {
+        setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize, orientation) {
             if (coordinateNum >= 0 && coordinateNum < 10 && letterCoordinates.includes(coordinateLetter)) {
                 ObjBoard[coordinateNum][coordinateLetter] = Ship(shipSize);
 
@@ -70,138 +71,3 @@ module.exports = {
 
 
 
-const shipBoard = [
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []],
-    [[], [], [], [], [], [], [], [], [], []]
-];
-
-const ShipBoard2 = [
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  },
-  {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
-    G: [],
-    H: [],
-    I: [],
-    J: []
-  }
-]
