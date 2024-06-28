@@ -37,6 +37,12 @@ test("Doesn't place ships on wrong coordinates", () => {
     
 });
 
+test("GameBoard holds larger ships on multiple cells", () => {
+    const newBoard = GameBoard();
+    newBoard.setShipOnBoard(0, "A", 2, "horiz");
+    expect(newBoard.ObjBoard[0]["A"]).toEqual(newBoard.ObjBoard[0]["B"]);
+})
+
 test("There is receiveAttack method", () => {
     const newBoard = GameBoard();
     newBoard.setShipOnBoard(0, "A", 2);

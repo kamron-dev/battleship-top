@@ -1,7 +1,7 @@
-const Ship = (length, timesHit = 0) => {
+const Ship = (length = 1) => {
     return {
         length,
-        timesHit,
+        timesHit: 0,
         checkIfSunk: function () {
             return this.timesHit === this.length;
         },
@@ -58,13 +58,7 @@ console.log(board1.receiveAttack(0, "A"));
 console.log("Ship after taking hit: " + board1.ObjBoard[0]["A"].timesHit);
 console.log("The ship has sunk: " + board1.ObjBoard[0]["A"].checkIfSunk())
 console.table(board1.missedShots)
-//console.log(board1.ObjBoard);
 
-//console.table(board1.ObjBoard);
-// board1.ObjBoard[1].A = "Hey";
-// console.log(board1.ObjBoard);
-
-//console.log(board1.ObjBoard.length);
 
 
 
@@ -72,3 +66,142 @@ module.exports = {
     Ship,
     GameBoard
 };
+
+
+
+
+const shipBoard = [
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []]
+];
+
+const ShipBoard2 = [
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  },
+  {
+    A: [],
+    B: [],
+    C: [],
+    D: [],
+    E: [],
+    F: [],
+    G: [],
+    H: [],
+    I: [],
+    J: []
+  }
+]
