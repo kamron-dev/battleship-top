@@ -23,15 +23,37 @@ const GameBoard = () => {
         
         
     };
-    
+    const setShipOnBoardHorizontally = (starRow, startCol, ship) => {
+        // implement
+        const startColIndex = letterCoordinates.indexOf(startCol);
+
+        for (let i = 0; i < ship.length; i++) {
+            ObjBoard[starRow][letterCoordinates[startColIndex + i]] = ship;
+        }
+    };
+
+    const setShipOnBoardVertically = (starRow, startCol, ship) => {
+        // implement
+        const startColIndex = letterCoordinates.indexOf(startCol);
+        for (let i = 0; i < ship.length; i++) {
+            ObjBoard[starRow + i][letterCoordinates[startColIndex]] = ship;
+        }
+    };
 
     
     return {
         ObjBoard,
         setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize, orientation) {
             if (coordinateNum >= 0 && coordinateNum < 10 && letterCoordinates.includes(coordinateLetter)) {
-                ObjBoard[coordinateNum][coordinateLetter] = Ship(shipSize);
-
+                const ship = Ship(shipSize);
+                if (orientation === "horizontal") {
+                    setShipOnBoardHorizontally(coordinateNum, coordinateLetter, ship);
+                    return "Ship set on board!";
+                } else {
+                    setShipOnBoardVertically(coordinateNum, coordinateLetter, ship);
+                    return "Ship set on board!"
+                }
+                
             } else {
                 console.error("Wrong coordinates. Ship is not placed!");
                 return;
@@ -50,15 +72,7 @@ const GameBoard = () => {
     }
 };
 
-const board1 = GameBoard();
-board1.setShipOnBoard(0, "A", 2);
-//console.log(board1.ObjBoard[0]["A"].checkIfSunk());
-console.log("Ship before taking hit: " + board1.ObjBoard[0]["A"].timesHit);
-console.log(board1.receiveAttack(0, "A"));
-console.log(board1.receiveAttack(0, "A"));
-console.log("Ship after taking hit: " + board1.ObjBoard[0]["A"].timesHit);
-console.log("The ship has sunk: " + board1.ObjBoard[0]["A"].checkIfSunk())
-console.table(board1.missedShots)
+
 
 
 
