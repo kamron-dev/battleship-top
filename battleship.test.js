@@ -7,7 +7,7 @@ const ship = Ship(4);
 
 test("Has the properties", () => {
     
-    expect(Object.keys(ship)).toEqual(["length", "timesHit", "isSunk", "hit"]);
+    expect(Object.keys(ship)).toEqual(["length", "timesHit", "checkIfSunk", "hit"]);
 });
 
 test("Ships take hits", () => {
@@ -36,3 +36,8 @@ test("Doesn't place ships on wrong coordinates", () => {
     expect(newBoard.setShipOnBoard(0, "Z", 2)).toBe(undefined);
     
 });
+
+test("There is receiveAttack method", () => {
+    const newBoard = GameBoard();
+    expect(newBoard.receiveAttack(1, "A")).toEqual("Hit!")
+})
