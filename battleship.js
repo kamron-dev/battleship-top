@@ -43,7 +43,7 @@ const GameBoard = () => {
     
     return {
         ObjBoard,
-        setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize, orientation) {
+        setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize, orientation = "horizontal") {
             if (coordinateNum >= 0 && coordinateNum < 10 && letterCoordinates.includes(coordinateLetter)) {
                 const ship = Ship(shipSize);
                 if (orientation === "horizontal") {
@@ -69,6 +69,14 @@ const GameBoard = () => {
             }
         },
         missedShots: [],
+        checkIfGameOver: function () {
+            // flatten the object into array with all cells
+            const allCells = ObjBoard.flatMap(row => Object.values(row));
+            // filter out the empty cells
+            const allCellsWithShips = allCells.filter(cell => cell.length);
+            // check if all have been sunk
+            return allCellsWithShips.every(ship => ship.checkIfSunk());
+        }
     }
 };
 

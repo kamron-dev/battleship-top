@@ -37,10 +37,16 @@ test("Doesn't place ships on wrong coordinates", () => {
     
 });
 
-test("GameBoard holds larger ships on multiple cells", () => {
+test("GameBoard puts larger ships on multiple cells horizontally", () => {
     const newBoard = GameBoard();
     newBoard.setShipOnBoard(0, "A", 2, "horizontal");
     expect(newBoard.ObjBoard[0]["A"]).toEqual(newBoard.ObjBoard[0]["B"]);
+})
+
+test("GameBoard puts larger ships on multiple cells vertically", () => {
+    const newBoard = GameBoard();
+    newBoard.setShipOnBoard(0, "A", 2, "vertical");
+    expect(newBoard.ObjBoard[0]["A"]).toEqual(newBoard.ObjBoard[1]["A"]);
 })
 
 test("There is receiveAttack method", () => {
@@ -58,12 +64,20 @@ test("receiveAttack method takes shots", () => {
 test("receiveAttack method hanldes missed shots", () => {
     const newBoard = GameBoard();
     newBoard.setShipOnBoard(0, "A", 2);
-    expect(newBoard.receiveAttack(0, "B")).toEqual("Miss!");
+    expect(newBoard.receiveAttack(4, "B")).toEqual("Miss!");
 });
 
 test("receiveAttack method collects missed shots", () => {
     const newBoard = GameBoard();
     newBoard.setShipOnBoard(0, "A", 2);
+    newBoard.receiveAttack(4, "B");
+    expect(newBoard.missedShots).toEqual([[4, "B"]]);
+});
+
+test("Gameboards report when all ships have been sunk", () => {
+    const newBoard = GameBoard();
+    newBoard.setShipOnBoard(0, "A", 2, "horizontal");
+    newBoard.receiveAttack(0, "A");
     newBoard.receiveAttack(0, "B");
-    expect(newBoard.missedShots).toEqual([[0, "B"]]);
+    expect(newBoard.checkIfGameOver()).toBe(true);
 });
