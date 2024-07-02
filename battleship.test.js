@@ -1,4 +1,4 @@
-const {Ship, GameBoard} = require("./battleship");
+const {Ship, GameBoard, Player, ComputerPlayer} = require("./battleship");
 
 
 
@@ -81,3 +81,14 @@ test("Gameboards report when all ships have been sunk", () => {
     newBoard.receiveAttack(0, "B");
     expect(newBoard.checkIfGameOver()).toBe(true);
 });
+
+test("Player factory exists!", () => {
+    const player1 = Player()
+    expect(typeof player1).toEqual("object")
+});
+
+test("Computer player factory exists!", () => {
+    const computerPlayer = ComputerPlayer()
+    expect(typeof computerPlayer).toEqual("object")
+});
+

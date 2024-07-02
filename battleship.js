@@ -68,7 +68,6 @@ const GameBoard = () => {
                 return "Miss!";
             }
         },
-        missedShots: [],
         checkIfGameOver: function () {
             // flatten the object into array with all cells
             const allCells = ObjBoard.flatMap(row => Object.values(row));
@@ -76,18 +75,34 @@ const GameBoard = () => {
             const allCellsWithShips = allCells.filter(cell => cell.length);
             // check if all have been sunk
             return allCellsWithShips.every(ship => ship.checkIfSunk());
-        }
+        },
+        missedShots: [],
     }
 };
 
 
+const Player = () => {
+    
+    return {
+        myBoard: GameBoard()
+    }
+};
+
+const ComputerPlayer = () => {
+    
+    return {
+        hisBoard: GameBoard()
+    }
+}
 
 
 
 
 module.exports = {
     Ship,
-    GameBoard
+    GameBoard,
+    Player,
+    ComputerPlayer
 };
 
 
