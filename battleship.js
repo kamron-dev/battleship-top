@@ -98,13 +98,9 @@ const ComputerPlayer = () => {
 
 
 
-module.exports = {
-    Ship,
+export { Ship,
     GameBoard,
     Player,
-    ComputerPlayer
-};
-
-
+    ComputerPlayer }
 
 

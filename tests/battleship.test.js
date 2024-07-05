@@ -1,4 +1,4 @@
-const {Ship, GameBoard, Player, ComputerPlayer} = require("../battleship");
+import {Ship, GameBoard, Player, ComputerPlayer} from "../battleship"
 
 
 
