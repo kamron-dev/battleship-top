@@ -1,4 +1,4 @@
-const {Ship, GameBoard, Player, ComputerPlayer} = require("./battleship");
+const {Ship, GameBoard, Player, ComputerPlayer} = require("../battleship");
 
 
 
