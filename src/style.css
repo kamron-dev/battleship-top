@@ -8,6 +8,9 @@ body {
 .player1, .player2 {
     grid-row: 2;
     border: 2px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #player1-footer, #player2-footer {
@@ -16,4 +19,10 @@ body {
 
 p {
     text-align: center;
+}
+
+.board-grid {
+    border: 2px solid blue;
+    width: 350px;
+    height: 350px;
 }

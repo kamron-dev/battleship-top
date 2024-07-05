@@ -5,6 +5,7 @@ const me = Player();
 
 const renderGrid = (player) => {
     const grid = document.createElement("div");
+    grid.classList.add("board-grid");
    
     player.myBoard.ObjBoard.forEach(object => {
         const allCells = Object.values(object);
