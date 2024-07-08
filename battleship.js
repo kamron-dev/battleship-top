@@ -84,14 +84,14 @@ const GameBoard = () => {
 const Player = () => {
     
     return {
-        myBoard: GameBoard()
+        board: GameBoard()
     }
 };
 
 const ComputerPlayer = () => {
     
     return {
-        hisBoard: GameBoard()
+        board: GameBoard()
     }
 }
 
