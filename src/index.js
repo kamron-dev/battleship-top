@@ -1,7 +1,7 @@
 import { Player, ComputerPlayer, Ship, GameBoard } from "../battleship.js";
 
 const myTable = document.querySelector(".battlefield-table-1");
-const opponentsDiv = document.querySelector(".player2");
+const opponentsTable = document.querySelector(".battlefield-table-2");
 const me = Player();
 const opponent = ComputerPlayer();
 
@@ -25,12 +25,14 @@ const createTable = () => {
         tr.classList.add("battlefield-row");
         tBody.appendChild(tr);
 
+        // create 10 tds in each tr
         for (let j = 0; j < 10; j++) {
             const td = document.createElement("td");
             td.setAttribute("data-column", letterCoordinates[j]);
+            td.setAttribute("data-row", i);
             td.classList.add("battlefield-cell");
             const div = document.createElement("div");
-            div.classList.add("battlefiled-cell-content");
+            div.classList.add("battlefield-cell-content");
             td.appendChild(div);
             tr.appendChild(td);
         };
@@ -39,5 +41,5 @@ const createTable = () => {
     return tBody;
 };
 
-myTable.innerHTML = ""
 myTable.appendChild(createTable());
+opponentsTable.appendChild(createTable());

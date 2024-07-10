@@ -27,7 +27,7 @@ p {
     text-align: center;
 }
 
-.battlefield-table-1 {
+.battlefield-table-1, .battlefield-table-2 {
     width: 360px;
     height: 360px;
     border: 2px solid rgb(57, 181, 222);
@@ -47,7 +47,7 @@ tbody {
 }
 
 .battlefield-cell {
-    border: 2px solid lightblue;
+    border: 2px solid rgb(176, 146, 234);
     margin: 0;
     padding: 0;
 }
