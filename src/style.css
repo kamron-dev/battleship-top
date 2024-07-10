@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     display: grid;
     grid-template-rows: 0.5fr 2fr 0.5fr;
@@ -21,13 +27,12 @@ p {
     text-align: center;
 }
 
-.board-grid-table {
-    border: 2px solid blue;
-    width: 350px;
-    height: 350px;
-    /* display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr); */
+.battlefield-table-1 {
+    width: 360px;
+    height: 360px;
+    border: 2px solid rgb(57, 181, 222);
+    border-collapse: collapse;
+    
 }
 
 tbody {
@@ -41,7 +46,13 @@ tbody {
     width: 100%;
 }
 
-/* .grid-button {
-    border: 1px solid blue;
-    color: whitesmoke;
-} */
+.battlefield-cell {
+    border: 2px solid lightblue;
+    margin: 0;
+    padding: 0;
+}
+
+.battlefield-cell-content {
+    height: 100%;
+    width: 100%;
+}
