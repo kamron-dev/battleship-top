@@ -81,16 +81,18 @@ const GameBoard = () => {
 };
 
 
-const Player = () => {
+const Player = (name) => {
     
     return {
+        name,
         board: GameBoard()
     }
 };
 
-const ComputerPlayer = () => {
+const ComputerPlayer = (name) => {
     
     return {
+        name,
         board: GameBoard()
     }
 }
