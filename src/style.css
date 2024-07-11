@@ -56,3 +56,8 @@ tbody {
     height: 100%;
     width: 100%;
 }
+
+
+td.battlefield-cell-occupied > div {
+    background-color: red;
+}
