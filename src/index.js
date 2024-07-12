@@ -1,4 +1,4 @@
-import { Player, ComputerPlayer, Ship, GameBoard } from "../battleship.js";
+import { Player, ComputerPlayer } from "../battleship.js";
 
 const myTable = document.querySelector(".battlefield-table-1");
 const opponentsTable = document.querySelector(".battlefield-table-2");
@@ -15,7 +15,7 @@ me.board.setShipOnBoard(8, "A", 4, "horizontal");
 
 opponent.board.setShipOnBoard(8, "A", 4, "horizontal");
 
-const createAndFillTableWithShips = (player) => {
+const createAndReturnTableWithShips = (player) => {
     const tBody = document.createElement("tbody");  /// there should be only 1
     
     for (let i = 0; i < player.board.ObjBoard.length; i++) {
@@ -55,11 +55,11 @@ const makeCellsWork = () => {
             
             if (cell.classList.length > 1) {
                 if (player === "Computer") {
-                    opponent.board.receiveAttack(data_row, data_column)
+                    console.log(opponent.board.receiveAttack(data_row, data_column))
                     console.log(opponent.board.ObjBoard[data_row][data_column]);
                     console.log(opponent.board.checkIfGameOver());
                 } else {
-                    me.board.receiveAttack(data_row, data_column)
+                    console.log(me.board.receiveAttack(data_row, data_column))
                     console.log(me.board.ObjBoard[data_row][data_column]);
                     console.log(me.board.checkIfGameOver());
                     
@@ -67,7 +67,15 @@ const makeCellsWork = () => {
 
                 cell.removeEventListener("click", cellClickHandler)
                 
-            } else return;
+            } else {
+                if (player === "Computer") {
+                    console.log(opponent.board.receiveAttack(data_row, data_column));
+                    console.log(opponent.board.missedShots);
+                } else {
+                    console.log(me.board.receiveAttack(data_row, data_column));
+                    console.log(me.board.missedShots);
+                }
+            };
     }
     allCells.forEach(cell => {
         cell.addEventListener("click", cellClickHandler);
@@ -76,10 +84,8 @@ const makeCellsWork = () => {
 }
 
 
-myTable.appendChild(createAndFillTableWithShips(me));
-opponentsTable.appendChild(createAndFillTableWithShips(opponent))
-// opponentsTable.appendChild(createAndFillTableWithShips(opponent));
+myTable.appendChild(createAndReturnTableWithShips(me));
+opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
 
-// makeCellsWork()
 
 makeCellsWork();
