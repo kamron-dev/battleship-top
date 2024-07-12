@@ -5,11 +5,15 @@ const opponentsTable = document.querySelector(".battlefield-table-2");
 const me = Player("Kamron");
 const opponent = ComputerPlayer("Computer");
 
+
+
 me.board.setShipOnBoard(1, "A");
 me.board.setShipOnBoard(3, "A");
 me.board.setShipOnBoard(4, "G");
 me.board.setShipOnBoard(5, "B");
 me.board.setShipOnBoard(8, "A", 4, "horizontal");
+
+opponent.board.setShipOnBoard(8, "A", 4, "horizontal");
 
 const createAndFillTableWithShips = (player) => {
     const tBody = document.createElement("tbody");  /// there should be only 1
@@ -39,10 +43,12 @@ const createAndFillTableWithShips = (player) => {
     return tBody;
 };
 
+
+
 const makeCellsWork = () => {
-    const allTds = document.querySelectorAll(".battlefield-cell");
-    allTds.forEach(cell => {
-        cell.addEventListener("click", () => {
+    const allCells = document.querySelectorAll(".battlefield-cell");
+    const cellClickHandler = (event) => {
+            const cell = event.currentTarget
             const player = cell.getAttribute("data-player");
             const data_row = cell.getAttribute("data-row");
             const data_column = cell.getAttribute("data-column");
@@ -50,19 +56,30 @@ const makeCellsWork = () => {
             if (cell.classList.length > 1) {
                 if (player === "Computer") {
                     opponent.board.receiveAttack(data_row, data_column)
+                    console.log(opponent.board.ObjBoard[data_row][data_column]);
+                    console.log(opponent.board.checkIfGameOver());
                 } else {
                     me.board.receiveAttack(data_row, data_column)
-                    console.log(me.board.ObjBoard[data_row][data_column])
+                    console.log(me.board.ObjBoard[data_row][data_column]);
+                    console.log(me.board.checkIfGameOver());
+                    
                 }
+
+                cell.removeEventListener("click", cellClickHandler)
                 
             } else return;
-            
-            
-        })
+    }
+    allCells.forEach(cell => {
+        cell.addEventListener("click", cellClickHandler);
     })
-};
+    
+}
 
 
 myTable.appendChild(createAndFillTableWithShips(me));
+opponentsTable.appendChild(createAndFillTableWithShips(opponent))
 // opponentsTable.appendChild(createAndFillTableWithShips(opponent));
-makeCellsWork()
+
+// makeCellsWork()
+
+makeCellsWork();
