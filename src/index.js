@@ -5,15 +5,19 @@ const opponentsTable = document.querySelector(".battlefield-table-2");
 const me = Player("Kamron");
 const opponent = ComputerPlayer("Computer");
 
+const setPredeterminedShips = (player) => {
+    player.board.setShipOnBoard(0, "I", 2);
+    player.board.setShipOnBoard(1, "B", 2, "vertical");
+    player.board.setShipOnBoard(3, "F", 4);
+    player.board.setShipOnBoard(4, "A", 3);
+    player.board.setShipOnBoard(5, "J");
+    player.board.setShipOnBoard(7, "J");
+    player.board.setShipOnBoard(7, "D");
+    player.board.setShipOnBoard(8, "A", 2);
+    player.board.setShipOnBoard(8, "F", 3);
+    player.board.setShipOnBoard(9, "J");
 
-
-me.board.setShipOnBoard(1, "A");
-me.board.setShipOnBoard(3, "A");
-me.board.setShipOnBoard(4, "G");
-me.board.setShipOnBoard(5, "B");
-me.board.setShipOnBoard(8, "A", 4, "horizontal");
-
-opponent.board.setShipOnBoard(8, "A", 4, "horizontal");
+};
 
 const createAndReturnTableWithShips = (player) => {
     const tBody = document.createElement("tbody");  /// there should be only 1
@@ -48,44 +52,49 @@ const createAndReturnTableWithShips = (player) => {
 const makeCellsWork = () => {
     const allCells = document.querySelectorAll(".battlefield-cell");
     const cellClickHandler = (event) => {
-            const cell = event.currentTarget
-            const player = cell.getAttribute("data-player");
-            const data_row = cell.getAttribute("data-row");
-            const data_column = cell.getAttribute("data-column");
+        const cell = event.currentTarget
+        const player = cell.getAttribute("data-player");
+        const row = cell.getAttribute("data-row");
+        const column = cell.getAttribute("data-column");
             
-            if (cell.classList.length > 1) {
-                if (player === "Computer") {
-                    console.log(opponent.board.receiveAttack(data_row, data_column))
-                    console.log(opponent.board.ObjBoard[data_row][data_column]);
-                    console.log(opponent.board.checkIfGameOver());
-                } else {
-                    console.log(me.board.receiveAttack(data_row, data_column))
-                    console.log(me.board.ObjBoard[data_row][data_column]);
-                    console.log(me.board.checkIfGameOver());
-                    
-                }
-
-                cell.removeEventListener("click", cellClickHandler)
-                
+        if (cell.classList.length > 1) {
+            if (player === "Computer") {
+                console.log(opponent.board.receiveAttack(row, column))
+                console.log(opponent.board.ObjBoard[row][column]);
+                console.log(opponent.board.checkIfGameOver());
+                cell.classList.add("battlefield-cell-occupied-hit");
             } else {
-                if (player === "Computer") {
-                    console.log(opponent.board.receiveAttack(data_row, data_column));
-                    console.log(opponent.board.missedShots);
-                } else {
-                    console.log(me.board.receiveAttack(data_row, data_column));
-                    console.log(me.board.missedShots);
-                }
-            };
+                console.log(me.board.receiveAttack(row, column))
+                console.log(me.board.ObjBoard[row][column]);
+                console.log(me.board.checkIfGameOver());
+                cell.classList.add("battlefield-cell-occupied-hit");
+                    
+            }
+
+            cell.removeEventListener("click", cellClickHandler)
+                
+        } else {
+            if (player === "Computer") {
+                console.log(opponent.board.receiveAttack(row, column));
+                console.log(opponent.board.missedShots);
+                cell.classList.add("battlefield-cell-occupied-miss");
+            } else {
+                console.log(me.board.receiveAttack(row, column));
+                console.log(me.board.missedShots);
+                cell.classList.add("battlefield-cell-occupied-miss");
+            }
+        };
     }
     allCells.forEach(cell => {
         cell.addEventListener("click", cellClickHandler);
     })
     
-}
+};
 
-
+setPredeterminedShips(me);
+setPredeterminedShips(opponent);
 myTable.appendChild(createAndReturnTableWithShips(me));
 opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
-
-
 makeCellsWork();
+
+

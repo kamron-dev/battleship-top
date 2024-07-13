@@ -14,9 +14,16 @@ body {
 .player1, .player2 {
     grid-row: 2;
     border: 2px solid red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
+}
+
+.number-signs {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
 }
 
 #player1-footer, #player2-footer {
@@ -32,7 +39,8 @@ p {
     height: 360px;
     border: 2px solid rgb(57, 181, 222);
     border-collapse: collapse;
-    
+    grid-column: 2;
+    grid-row: 2;
 }
 
 tbody {
@@ -58,6 +66,12 @@ tbody {
 }
 
 
-td.battlefield-cell-occupied > div {
+td.battlefield-cell-occupied-hit > div {
     background-color: red;
+}
+
+td.battlefield-cell-occupied-miss>div {
+    background-color: rgb(226, 226, 226);
+
+
 }
