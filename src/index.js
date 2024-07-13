@@ -56,34 +56,40 @@ const makeCellsWork = () => {
         const player = cell.getAttribute("data-player");
         const row = cell.getAttribute("data-row");
         const column = cell.getAttribute("data-column");
-            
-        if (cell.classList.length > 1) {
+        const isOccupied = cell.classList.length > 1;
+
+        const shoot = (player) => {
             if (player === "Computer") {
                 console.log(opponent.board.receiveAttack(row, column))
                 console.log(opponent.board.ObjBoard[row][column]);
                 console.log(opponent.board.checkIfGameOver());
-                cell.classList.add("battlefield-cell-occupied-hit");
             } else {
                 console.log(me.board.receiveAttack(row, column))
                 console.log(me.board.ObjBoard[row][column]);
                 console.log(me.board.checkIfGameOver());
-                cell.classList.add("battlefield-cell-occupied-hit");
-                    
             }
+            cell.classList.add("battlefield-cell-occupied-hit");
+        };
 
-            cell.removeEventListener("click", cellClickHandler)
-                
-        } else {
+        const miss = (player) => {
             if (player === "Computer") {
                 console.log(opponent.board.receiveAttack(row, column));
                 console.log(opponent.board.missedShots);
-                cell.classList.add("battlefield-cell-occupied-miss");
             } else {
                 console.log(me.board.receiveAttack(row, column));
                 console.log(me.board.missedShots);
-                cell.classList.add("battlefield-cell-occupied-miss");
             }
+            cell.classList.add("battlefield-cell-occupied-miss");
         };
+        if (isOccupied) {
+            shoot(player);
+            
+        } else {
+            miss(player);
+            
+        };
+
+        cell.removeEventListener("click", cellClickHandler);
     }
     allCells.forEach(cell => {
         cell.addEventListener("click", cellClickHandler);
