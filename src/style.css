@@ -19,12 +19,6 @@ body {
     grid-template-rows: 1fr 4fr 1fr;
 }
 
-.number-signs {
-    grid-column: 2;
-    grid-row: 1;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-}
 
 #player1-footer, #player2-footer {
     grid-row: 3;
@@ -42,6 +36,9 @@ p {
     grid-column: 2;
     grid-row: 2;
 }
+table {
+    table-layout: fixed;
+}
 
 tbody {
     width: 100%;
@@ -55,7 +52,7 @@ tbody {
 }
 
 .battlefield-cell {
-    border: 2px solid rgb(176, 146, 234);
+    border: 2px solid rgb(89, 93, 188);
     margin: 0;
     padding: 0;
 }
@@ -67,11 +64,11 @@ tbody {
 
 
 td.battlefield-cell-occupied-hit > div {
-    background-color: red;
+    border: 2px dashed red;
 }
 
 td.battlefield-cell-occupied-miss>div {
-    background-color: rgb(226, 226, 226);
+    background-color: lightblue;
 
 
 }

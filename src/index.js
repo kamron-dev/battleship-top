@@ -60,12 +60,18 @@ const makeCellsWork = () => {
 
         const shoot = (player) => {
             if (player === "Computer") {
-                console.log(opponent.board.receiveAttack(row, column))
+                alert(opponent.board.receiveAttack(row, column))
                 console.log(opponent.board.ObjBoard[row][column]);
+                if (opponent.board.ObjBoard[row][column].checkIfSunk()) {
+                    alert("The ship has sunk!")
+                }
                 console.log(opponent.board.checkIfGameOver());
             } else {
-                console.log(me.board.receiveAttack(row, column))
+                alert(me.board.receiveAttack(row, column))
                 console.log(me.board.ObjBoard[row][column]);
+                if (me.board.ObjBoard[row][column].checkIfSunk()) {
+                    alert("The ship has sunk!");
+                }
                 console.log(me.board.checkIfGameOver());
             }
             cell.classList.add("battlefield-cell-occupied-hit");
@@ -73,10 +79,10 @@ const makeCellsWork = () => {
 
         const miss = (player) => {
             if (player === "Computer") {
-                console.log(opponent.board.receiveAttack(row, column));
+                alert(opponent.board.receiveAttack(row, column));
                 console.log(opponent.board.missedShots);
             } else {
-                console.log(me.board.receiveAttack(row, column));
+                alert(me.board.receiveAttack(row, column));
                 console.log(me.board.missedShots);
             }
             cell.classList.add("battlefield-cell-occupied-miss");

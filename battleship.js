@@ -62,6 +62,7 @@ const GameBoard = () => {
         receiveAttack: function (coordinateNum, coordinateLetter) {
             if (ObjBoard[coordinateNum][coordinateLetter].length) {
                 ObjBoard[coordinateNum][coordinateLetter].hit();
+                console.log("The ship has sunk: " + ObjBoard[coordinateNum][coordinateLetter].checkIfSunk());
                 return "The ship has been hit!";
             } else {
                 this.missedShots.push([coordinateNum, coordinateLetter]);
