@@ -53,47 +53,23 @@ const makeCellsWork = () => {
     const allCells = document.querySelectorAll(".battlefield-cell");
     const cellClickHandler = (event) => {
         const cell = event.currentTarget
-        const player = cell.getAttribute("data-player");
+        const player = cell.getAttribute("data-player") === "Computer" ? opponent : me;
         const row = cell.getAttribute("data-row");
         const column = cell.getAttribute("data-column");
         const isOccupied = cell.classList.length > 1;
 
-        const shoot = (player) => {
-            if (player === "Computer") {
-                alert(opponent.board.receiveAttack(row, column))
-                console.log(opponent.board.ObjBoard[row][column]);
-                if (opponent.board.ObjBoard[row][column].checkIfSunk()) {
-                    alert("The ship has sunk!")
-                }
-                console.log(opponent.board.checkIfGameOver());
+        const handleAttack = (player, row, column, isOccupied, cell) => {
+            if (isOccupied) {
+                console.log(player.board.receiveAttack(row, column));
+                if (player.board.ObjBoard[row][column].checkIfSunk()) console.log("The ship has sunk!");
+                cell.classList.add("battlefield-cell-occupied-hit");
             } else {
-                alert(me.board.receiveAttack(row, column))
-                console.log(me.board.ObjBoard[row][column]);
-                if (me.board.ObjBoard[row][column].checkIfSunk()) {
-                    alert("The ship has sunk!");
-                }
-                console.log(me.board.checkIfGameOver());
+                console.log(player.board.receiveAttack(row, column));
+                console.log(player.board.missedShots);
+                cell.classList.add("battlefield-cell-occupied-miss");
             }
-            cell.classList.add("battlefield-cell-occupied-hit");
         };
-
-        const miss = (player) => {
-            if (player === "Computer") {
-                alert(opponent.board.receiveAttack(row, column));
-                console.log(opponent.board.missedShots);
-            } else {
-                alert(me.board.receiveAttack(row, column));
-                console.log(me.board.missedShots);
-            }
-            cell.classList.add("battlefield-cell-occupied-miss");
-        };
-        if (isOccupied) {
-            shoot(player);
-            
-        } else {
-            miss(player);
-            
-        };
+        handleAttack(player, row, column, isOccupied, cell);
 
         cell.removeEventListener("click", cellClickHandler);
     }
