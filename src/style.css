@@ -13,7 +13,6 @@ body {
 
 .player1, .player2 {
     grid-row: 2;
-    border: 2px solid red;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr 4fr 1fr;
@@ -53,8 +52,7 @@ tbody {
 
 .battlefield-cell {
     border: 2px solid rgb(89, 93, 188);
-    margin: 0;
-    padding: 0;
+    cursor: pointer;
 }
 
 .battlefield-cell-content {
@@ -67,8 +65,11 @@ td.battlefield-cell-occupied-hit > div {
     border: 2px dashed red;
 }
 
-td.battlefield-cell-occupied-miss>div {
-    background-color: lightblue;
-
+td.battlefield-cell-occupied-miss>div::before {
+    content: "✖";
+    position: relative;
+    left: 33%;
+    top: 23%;
+    
 
 }
