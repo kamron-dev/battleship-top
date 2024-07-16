@@ -13,3 +13,11 @@ opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
 makeCellsWork(me, opponent);
 
 
+const playGame = (() => {
+    const mySide = document.querySelector(".player1");
+    const computerSide = document.querySelector(".player2");
+    
+
+    // mySide.classList.add("disabled");
+    
+})();

@@ -73,3 +73,8 @@ td.battlefield-cell-occupied-miss>div::before {
     
 
 }
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}
