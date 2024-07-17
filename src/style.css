@@ -51,7 +51,7 @@ tbody {
 }
 
 .battlefield-cell {
-    border: 2px solid rgb(89, 93, 188);
+    border: 2px solid rgb(111, 192, 230);
     cursor: pointer;
 }
 
@@ -65,7 +65,7 @@ td.battlefield-cell-occupied-hit > div {
     border: 2px dashed red;
 }
 
-td.battlefield-cell-occupied-miss>div::before {
+td.battlefield-cell-miss>div::before {
     content: "✖";
     position: relative;
     left: 33%;
