@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-size: 1.2rem;
 }
 
 body {
@@ -68,8 +69,8 @@ td.battlefield-cell-occupied-hit > div {
 td.battlefield-cell-miss>div::before {
     content: "✖";
     position: relative;
-    left: 33%;
-    top: 23%;
+    left: 23%;
+    top: 15%;
     
 
 }
@@ -77,4 +78,29 @@ td.battlefield-cell-miss>div::before {
 .disabled {
     pointer-events: none;
     opacity: 0.3;
+}
+
+.numbers {
+    align-self: baseline;
+    grid-column: 2;
+    width: 360px;
+    align-self: end;
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    
+}
+
+.letters {
+    grid-column: 1;
+    grid-row: 2;
+    height: 360px;
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    justify-self: end;
+    margin-right: 15px;
+    
+}
+.letters > p {
+    padding-top: 5px;
 }
