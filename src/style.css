@@ -85,10 +85,9 @@ td.battlefield-cell-miss>div::before {
     grid-column: 2;
     width: 360px;
     align-self: end;
-    height: 50px;
+    height: 35px;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    margin-bottom: -15px;
     
 }
 
@@ -104,4 +103,16 @@ td.battlefield-cell-miss>div::before {
 }
 .letters > p {
     padding-top: 5px;
+}
+
+#myMessages, #opponentMessages {
+    width: 100%;
+
+}
+
+#myMessages > p,
+#opponentMessages > p {
+    text-align: center;
+    margin-top: 45px;
+    margin-right: 65px;
 }
