@@ -99,6 +99,7 @@ const ComputerPlayer = (name) => {
     
     return {
         name,
+        movesMade: [],
         board: GameBoard()
     }
 }
