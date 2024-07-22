@@ -13,12 +13,12 @@ myTable.appendChild(createAndReturnTableWithShips(me));
 opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
 makeCellsWork(me, opponent);
 
-console.log(computerMoves(opponent))
-console.log(opponent.movesMade)
+// console.log(computerMoves(opponent))
 
-console.log(computerMoves(opponent))
-console.log(opponent.movesMade)
 
-console.log(computerMoves(opponent))
-console.log(opponent.movesMade)
+// console.log(computerMoves(opponent))
+
+
+// console.log(computerMoves(opponent))
+// console.log(opponent.movesMade)
 
