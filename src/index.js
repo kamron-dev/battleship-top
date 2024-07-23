@@ -10,7 +10,7 @@ setPredeterminedShips(me);
 setPredeterminedShips(opponent);
 myTable.appendChild(createAndReturnTableWithShips(me));
 opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
-makeMeMove(opponent);
+makeMeMove(opponent, me);
 // makeComputerMove(opponent)
 
 // console.log(computerMoves(opponent))
