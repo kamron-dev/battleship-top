@@ -1,6 +1,5 @@
 import { Player, ComputerPlayer } from "../battleship.js";
-import { setPredeterminedShips, createAndReturnTableWithShips, makeCellsWork, makeMeMove } from "../DOMstuff.js";
-import { computerMoves } from "../computerMoves.js";
+import { setPredeterminedShips, createAndReturnTableWithShips, makeMeMove, makeComputerMove } from "../DOMstuff.js";
 
 const myTable = document.querySelector(".battlefield-table-1");
 const opponentsTable = document.querySelector(".battlefield-table-2");
@@ -11,9 +10,8 @@ setPredeterminedShips(me);
 setPredeterminedShips(opponent);
 myTable.appendChild(createAndReturnTableWithShips(me));
 opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
-// makeCellsWork(me, opponent);
-
 makeMeMove(opponent);
+// makeComputerMove(opponent)
 
 // console.log(computerMoves(opponent))
 

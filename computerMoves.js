@@ -5,7 +5,7 @@ export const computerMoves = (computerPlayer) => {
     let newMove;
 
     do {
-        newMove = [rows[Math.floor(Math.random() * rows.length)], columns[Math.floor(Math.random() * rows.length)]];
+        newMove = [columns[Math.floor(Math.random() * columns.length)], rows[Math.floor(Math.random() * rows.length)]];
     } while (
         computerPlayer.movesMade.some(move => move[0] === newMove[0] && move[1] === newMove[1])
     );
