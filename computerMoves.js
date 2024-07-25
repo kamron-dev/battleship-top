@@ -1,6 +1,6 @@
 export const computerMoves = (computerPlayer) => {
-    const rows = "ABCDEFGHIJ".split("");
     const columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const rows = "ABCDEFGHIJ".split("");
     
     let newMove;
 
