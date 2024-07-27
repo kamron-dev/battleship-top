@@ -60,6 +60,7 @@ const GameBoard = () => {
             };
         },
         receiveAttack: function (coordinateNum, coordinateLetter) {
+            // console.log(`CoordinateNum: ${coordinateNum}, CoordinateLetter: ${coordinateLetter}`);
             if (ObjBoard[coordinateNum][coordinateLetter].length) {
                 ObjBoard[coordinateNum][coordinateLetter].hit();
                 
