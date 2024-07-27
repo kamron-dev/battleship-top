@@ -2,9 +2,11 @@ import { computerMoves } from "./computerMoves.js";
 
 export const setPredeterminedShips = (player) => {
     player.board.setShipOnBoard(0, "A");
-    player.board.setShipOnBoard(9, "J");
-    player.board.setShipOnBoard(9, "A");
-    player.board.setShipOnBoard(0, "J");
+    
+    player.board.setShipOnBoard(2, "A", 4);
+    // player.board.setShipOnBoard(9, "J");
+    // player.board.setShipOnBoard(9, "A");
+    // player.board.setShipOnBoard(0, "J");
 
 };
 

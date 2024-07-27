@@ -11,14 +11,6 @@ setPredeterminedShips(opponent);
 myTable.appendChild(createAndReturnTableWithShips(me));
 opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
 makeMeMove(opponent, me);
-// makeComputerMove(opponent)
 
-// console.log(computerMoves(opponent))
-
-
-// console.log(computerMoves(opponent))
-
-
-// console.log(computerMoves(opponent))
-// console.log(opponent.movesMade)
+console.log(me.board.ObjBoard)
 

@@ -23,21 +23,27 @@ export const computerMoves = (computerPlayer) => {
         ];
 
         return potentialMoves.filter(([column, row]) => {
-            return checkIfValid(column, rowIndex(row));
+            return checkIfValid(column, rowsIntoIndex(row));
         });
     };
+    if (computerPlayer.movesMade.length > 0 && computerPlayer.hits.length > 0) {
 
-    const lastMove = computerPlayer.movesMade[computerPlayer.movesMade.length - 1];
-    const lastHit = computerPlayer.hits[computerPlayer.hits.length - 1];
-    const lastMoveWasHit = lastMove[0] === lastHit[0] && lastMove[1] === lastHit[1];
+        const lastMove = computerPlayer.movesMade[computerPlayer.movesMade.length - 1];
+        const lastHit = computerPlayer.hits[computerPlayer.hits.length - 1];
+        const lastMoveWasHit = lastMove[0] === lastHit[0] && lastMove[1] === lastHit[1];
 
-    if (lastMoveWasHit) {
-        const adjacentMoves = createAdjacentMoves(lastMove);
-        const filteredAdjacentMoves = adjacentMoves.some(move => {
-            !computerPlayer.movesMade.some(madeMove => madeMove[0] === move[0] && madeMove[1] === madeMove[1]);
-        });
-        if (filteredAdjacentMoves.length > 1) {
-            newMove = filteredAdjacentMoves[Math.floor(Math.random() * filteredAdjacentMoves.length)];
+        console.log(`Last Move: ${lastMove}, Last hit: ${lastHit}`);
+    
+        if (lastMoveWasHit) {
+            const adjacentMoves = createAdjacentMoves(lastMove);
+            const filteredAdjacentMoves = adjacentMoves.some(move => {
+                !computerPlayer.movesMade.some(madeMove => madeMove[0] === move[0] && madeMove[1] === madeMove[1]);
+            });
+            if (filteredAdjacentMoves.length > 1) {
+                newMove = filteredAdjacentMoves[Math.floor(Math.random() * filteredAdjacentMoves.length)];
+            } else {
+                newMove = filteredAdjacentMoves;
+            }
         }
     }
 
