@@ -1,18 +1,22 @@
 import { computerMoves } from "./computerMoves.js";
 
 export const setPredeterminedShips = (player) => {
-    player.board.setShipOnBoard(0, "A");
-    
-    player.board.setShipOnBoard(2, "A", 4);
-    player.board.setShipOnBoard(9, "J");
-    player.board.setShipOnBoard(9, "A");
-    player.board.setShipOnBoard(5, "E", 2);
-
+    // First set of ships
+    player.board.setShipOnBoard(1, "B");
+    player.board.setShipOnBoard(0, "D", 3, "vertical");
+    player.board.setShipOnBoard(0, "H");
+    player.board.setShipOnBoard(0, "J");
+    player.board.setShipOnBoard(4, "A", 3, "vertical");
+    player.board.setShipOnBoard(4, "F", 2, "vertical");
+    player.board.setShipOnBoard(4, "H");
+    player.board.setShipOnBoard(6, "C", 2);
+    player.board.setShipOnBoard(8, "A", 4);
+    player.board.setShipOnBoard(8, "F", 2, "vertical");
 };
 
 export const createAndReturnTableWithShips = (player) => {
     const tBody = document.createElement("tbody");  /// there should be only 1
-    const letterCoordinates = "ABCDEFGHIJ".split("");
+    // const letterCoordinates = "ABCDEFGHIJ".split("");
     
     for (let i = 0; i < player.board.ObjBoard.length; i++) {
         const tr = document.createElement("tr");
@@ -115,6 +119,7 @@ export const makeComputerMove = (opponent, me) => {
                 };
                 makeComputerMove(opponent, me)
             } else {
+                showMessage(messageContainer, me.board.receiveAttack(opponentMove[0], opponentMove[1]));
                 shotCell.classList.add("battlefield-cell-miss");
                 switchTurns(computerSide, mySide);
             }

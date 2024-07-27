@@ -61,7 +61,7 @@ tbody {
     width: 100%;
 }
 
-.battlefield-cell-occupied[data-player=Kamron] > div {
+.battlefield-cell-occupied[data-player=Kamron] {
     border: 2px solid blue;
 }
 

@@ -36,13 +36,9 @@ export const computerMoves = (computerPlayer) => {
     
         if (lastMoveWasHit) {
             const adjacentMoves = createAdjacentMoves(lastMove);
-            const filteredAdjacentMoves = adjacentMoves.some(move => {
-                !computerPlayer.movesMade.some(madeMove => madeMove[0] === move[0] && madeMove[1] === madeMove[1]);
-            });
-            if (filteredAdjacentMoves.length > 1) {
+            const filteredAdjacentMoves = adjacentMoves.filter(move => !computerPlayer.movesMade.includes(move));
+            if (filteredAdjacentMoves.length > 0) {
                 newMove = filteredAdjacentMoves[Math.floor(Math.random() * filteredAdjacentMoves.length)];
-            } else {
-                newMove = filteredAdjacentMoves;
             }
         }
     }
