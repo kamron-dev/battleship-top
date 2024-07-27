@@ -61,8 +61,8 @@ tbody {
     width: 100%;
 }
 
-.battlefield-cell-occupied {
-    border: 2px solid green
+.battlefield-cell-occupied[data-player=Kamron] > div {
+    border: 2px solid blue;
 }
 
 td.battlefield-cell-occupied-hit > div {
@@ -121,10 +121,3 @@ td.battlefield-cell-miss>div::before {
 }
 
 
-/* grid-column: 1;
-grid-row: 2;
-height: 360px;
-display: grid;
-grid-template-rows: repeat(10, 1fr);
-justify-self: end;
-margin-right: 15px; */
