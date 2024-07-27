@@ -100,6 +100,7 @@ const ComputerPlayer = (name) => {
     return {
         name,
         movesMade: [],
+        hits: [],
         board: GameBoard()
     }
 }

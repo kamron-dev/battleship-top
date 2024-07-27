@@ -1,32 +1,27 @@
 import { computerMoves } from "./computerMoves.js";
 
 export const setPredeterminedShips = (player) => {
-    player.board.setShipOnBoard(0, "I", 2);
-    player.board.setShipOnBoard(1, "B", 2, "vertical");
-    player.board.setShipOnBoard(3, "F", 4);
-    player.board.setShipOnBoard(4, "A", 3);
-    player.board.setShipOnBoard(5, "J");
-    player.board.setShipOnBoard(7, "J");
-    player.board.setShipOnBoard(7, "D");
-    player.board.setShipOnBoard(8, "A", 2);
-    player.board.setShipOnBoard(8, "F", 3);
+    player.board.setShipOnBoard(0, "A");
     player.board.setShipOnBoard(9, "J");
+    player.board.setShipOnBoard(9, "A");
+    player.board.setShipOnBoard(0, "J");
 
 };
 
 export const createAndReturnTableWithShips = (player) => {
     const tBody = document.createElement("tbody");  /// there should be only 1
+    const letterCoordinates = "ABCDEFGHIJ".split("");
     
     for (let i = 0; i < player.board.ObjBoard.length; i++) {
         const tr = document.createElement("tr");
-        tr.setAttribute("data-row", i);
+        tr.setAttribute("data-row", letterCoordinates[i]);
         tr.classList.add("battlefield-row");
         tBody.appendChild(tr);
 
         for (let cell in player.board.ObjBoard[i]) {
             const td = document.createElement("td");
-            td.setAttribute("data-row", i);
-            td.setAttribute("data-column", cell);
+            td.setAttribute("data-column", letterCoordinates.indexOf(cell));
+            td.setAttribute("data-row", letterCoordinates[i]);
             td.setAttribute("data-player", player.name)
             td.classList.add("battlefield-cell");
             if (player.board.ObjBoard[i][cell].length) td.classList.add("battlefield-cell-occupied");
@@ -38,7 +33,9 @@ export const createAndReturnTableWithShips = (player) => {
 
         };
 
+
     };
+
     return tBody;
 };
 
@@ -57,9 +54,9 @@ export const makeMeMove = (opponent, me) => {
         const column = cell.getAttribute("data-column");
         const isOccupied = cell.classList.length > 1;
 
-        const handleAttack = (row, column, isOccupied, cell) => {
+        const handleAttack = (column, row, isOccupied, cell) => {
             if (isOccupied) {
-                showMessage(messageContainer, opponent.board.receiveAttack(row, column));
+                showMessage(messageContainer, opponent.board.receiveAttack(column, row));
                 cell.classList.add("battlefield-cell-occupied-hit");
                 
                 if (checkEndGame(opponent)) {
@@ -68,15 +65,16 @@ export const makeMeMove = (opponent, me) => {
                     showMessage(messageContainer, `All ships destroyed! ${opponent.name} lost!`);
                 };
             } else {
-                showMessage(messageContainer, opponent.board.receiveAttack(row, column));
+                showMessage(messageContainer, opponent.board.receiveAttack(column, row));
                 cell.classList.add("battlefield-cell-miss");
                 switchTurns(mySide, computerSide);
                 makeComputerMove(opponent, me)
                 
             }
+            console.log(`Column: ${column}, row: ${row}, cell: ${cell} isOccupied: ${isOccupied}`);
         };
 
-        handleAttack(row, column, isOccupied, cell);
+        handleAttack(column, row, isOccupied, cell);
         cell.removeEventListener("click", cellClickHandler);
 
     };
@@ -92,16 +90,19 @@ export const makeComputerMove = (opponent, me) => {
     const messageContainer = document.getElementById("myMessages")
     const style = getComputedStyle(mySide);
     const mySideDisabled = style.pointerEvents === "none";
-    const opponentMove = computerMoves(opponent);
+    
     
     
     if (!mySideDisabled) {
         setTimeout(() => {
+            const opponentMove = computerMoves(opponent);
             const shotCell = myCells.find(cell => {
-                return cell.getAttribute("data-row") === opponentMove[0].toString() && cell.getAttribute("data-column") === opponentMove[1].toString();
+                return cell.getAttribute("data-column") === opponentMove[0].toString() && cell.getAttribute("data-row") === opponentMove[1].toString();
             });
             if (shotCell.classList.contains("battlefield-cell-occupied")) {
-                console.log("computer hit target!")
+                opponent.hits.push([opponentMove[0], opponentMove[1]]);
+                // console.log([opponentMove[0], opponentMove[1]])
+                // console.log(opponent.hits);
                 showMessage(messageContainer, me.board.receiveAttack(opponentMove[0], opponentMove[1]));
                 shotCell.classList.add("battlefield-cell-occupied-hit");
                 if (checkEndGame(me)) {
@@ -111,7 +112,6 @@ export const makeComputerMove = (opponent, me) => {
                 };
                 makeComputerMove(opponent, me)
             } else {
-                console.log("computer missed!");
                 shotCell.classList.add("battlefield-cell-miss");
                 switchTurns(computerSide, mySide);
             }
