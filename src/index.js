@@ -12,5 +12,4 @@ myTable.appendChild(createAndReturnTableWithShips(me));
 opponentsTable.appendChild(createAndReturnTableWithShips(opponent));
 makeMeMove(opponent, me);
 
-console.log(me.board.ObjBoard)
 
