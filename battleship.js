@@ -17,33 +17,53 @@ const GameBoard = () => {
     for (let i = 0; i < 10; i++) {
         const row = {};
         letterCoordinates.forEach(letter => {
-            row[letter] = []
-        })
+            row[letter] = []; // Initialize as an empty array or null to signify no ship
+        });
         ObjBoard[i] = row;
-        
-        
-    };
-    const isSpaceAviableHorizontally = (startRow, startCol, length) => {
-        const startColIndex = letterCoordinates.indexOf(startCol);
-
-        for (let i = 0; i < length; i++) {
-            if (startColIndex + i >= 10 || ObjBoard[startRow][letterCoordinates[startColIndex + i]].length) {
-                return false;
-            };
-        };
-
-        return true;
     };
 
-    const isSpaceAviableVertically = (startRow, startCol, length) => {
+    const clearOutTheBoard = () => {
+        ObjBoard = [];
+        
+        // for (let i = 0; i < 10; i++) {
+        //     const row = {};
+        //     letterCoordinates.forEach(letter => {
+        //         row[letter] = []; // Initialize as an empty array or null to signify no ship
+        //     });
+        //     ObjBoard[i] = row;
+        // };
+    }
+
+    const isWithinBounds = (row, col) => row >= 0 && row < 10 && col >= 0 && col < 10;
+
+    const isSpaceAvailable = (startRow, startCol, length, orientation) => {
         const startColIndex = letterCoordinates.indexOf(startCol);
 
+        // Base case: Out of bounds or space occupied
         for (let i = 0; i < length; i++) {
-            if (startRow + i >= 10 || ObjBoard[startRow + i][letterCoordinates[startColIndex]].length) {
-                return false;
-            };
-        };
+            const row = startRow + (orientation === "vertical" ? i : 0);
+            const colIndex = startColIndex + (orientation === "horizontal" ? i : 0);
 
+            if (!isWithinBounds(row, colIndex) || ObjBoard[row][letterCoordinates[colIndex]].length) {
+                return false;
+            }
+
+            // Check surrounding cells, including diagonals
+            if (
+                (row > 0 && ObjBoard[row - 1][letterCoordinates[colIndex]]?.length) || // Above
+                (row < 9 && ObjBoard[row + 1][letterCoordinates[colIndex]]?.length) || // Below
+                (colIndex > 0 && ObjBoard[row][letterCoordinates[colIndex - 1]]?.length) || // Left
+                (colIndex < 9 && ObjBoard[row][letterCoordinates[colIndex + 1]]?.length) || // Right
+                (row > 0 && colIndex > 0 && ObjBoard[row - 1][letterCoordinates[colIndex - 1]]?.length) || // Top-left
+                (row > 0 && colIndex < 9 && ObjBoard[row - 1][letterCoordinates[colIndex + 1]]?.length) || // Top-right
+                (row < 9 && colIndex > 0 && ObjBoard[row + 1][letterCoordinates[colIndex - 1]]?.length) || // Bottom-left
+                (row < 9 && colIndex < 9 && ObjBoard[row + 1][letterCoordinates[colIndex + 1]]?.length) // Bottom-right
+            ) {
+                return false;
+            }
+        }
+
+        // If all checks are passed, return true
         return true;
     };
 
@@ -53,35 +73,33 @@ const GameBoard = () => {
         while (!placed) {
             const startRow = Math.floor(Math.random() * 10);
             const startCol = letterCoordinates[Math.floor(Math.random() * 10)];
-            const randomOrientation = Math.random() > 0.5 ? "vertical" : "horiznontal";
+            const randomOrientation = Math.random() > 0.5 ? "vertical" : "horizontal";
 
-            if (randomOrientation === "vertical" && isSpaceAviableVertically(startRow, startCol, shipSize)) {
+            if (randomOrientation === "vertical" && isSpaceAvailable(startRow, startCol, shipSize, "vertical")) {
                 setShipOnBoardVertically(startRow, startCol, Ship(shipSize));
                 placed = true;
-            } else if (randomOrientation === "horiznontal" && isSpaceAviableHorizontally(startRow, startCol, shipSize)) {
+            } else if (randomOrientation === "horizontal" && isSpaceAvailable(startRow, startCol, shipSize, "horizontal")) {
                 setShipOnBoardHorizontally(startRow, startCol, Ship(shipSize));
                 placed = true;
             };
         }
-    }
-    const setShipOnBoardHorizontally = (starRow, startCol, ship) => {
-        // implement
+    };
+
+    const setShipOnBoardHorizontally = (startRow, startCol, ship) => {
         const startColIndex = letterCoordinates.indexOf(startCol);
 
         for (let i = 0; i < ship.length; i++) {
-            ObjBoard[starRow][letterCoordinates[startColIndex + i]] = ship;
+            ObjBoard[startRow][letterCoordinates[startColIndex + i]] = ship;
         }
     };
 
-    const setShipOnBoardVertically = (starRow, startCol, ship) => {
-        // implement
+    const setShipOnBoardVertically = (startRow, startCol, ship) => {
         const startColIndex = letterCoordinates.indexOf(startCol);
         for (let i = 0; i < ship.length; i++) {
-            ObjBoard[starRow + i][letterCoordinates[startColIndex]] = ship;
+            ObjBoard[startRow + i][letterCoordinates[startColIndex]] = ship;
         }
     };
 
-    
     return {
         ObjBoard,
         setShipOnBoard: function (coordinateNum, coordinateLetter, shipSize, orientation = "horizontal") {
@@ -92,13 +110,12 @@ const GameBoard = () => {
                     return "Ship set on board!";
                 } else {
                     setShipOnBoardVertically(coordinateNum, coordinateLetter, ship);
-                    return "Ship set on board!"
+                    return "Ship set on board!";
                 }
-                
             } else {
                 console.error("Wrong coordinates. Ship is not placed!");
                 return;
-            };
+            }
         },
         setShipsRandomly: function (ships) {
             ships.forEach(shipSize => {
@@ -106,7 +123,6 @@ const GameBoard = () => {
             });
         },
         receiveAttack: function (coordinateNum, coordinateLetter) {
-            // console.log(`CoordinateNum: ${coordinateNum}, CoordinateLetter: ${coordinateLetter}`);
             if (ObjBoard[coordinateNum][coordinateLetter].length) {
                 ObjBoard[coordinateNum][coordinateLetter].hit();
                 
@@ -114,50 +130,36 @@ const GameBoard = () => {
                     return "The ship has sunk!";
                 } else {
                     return "The ship has been hit!";
-                };
-        
+                }
             } else {
                 this.missedShots.push([coordinateNum, coordinateLetter]);
                 return "Miss!";
             }
         },
         checkIfGameOver: function () {
-            // flatten the object into array with all cells
             const allCells = ObjBoard.flatMap(row => Object.values(row));
-            // filter out the empty cells
             const allCellsWithShips = allCells.filter(cell => cell.length);
-            // check if all have been sunk
             return allCellsWithShips.every(ship => ship.checkIfSunk());
         },
         missedShots: [],
-    }
+        clearOutTheBoard
+    };
 };
 
-
 const Player = (name) => {
-    
     return {
         name,
         board: GameBoard()
-    }
+    };
 };
 
 const ComputerPlayer = (name) => {
-    
     return {
         name,
         movesMade: [],
         hits: [],
         board: GameBoard()
-    }
-}
+    };
+};
 
-
-
-
-export { Ship,
-    GameBoard,
-    Player,
-    ComputerPlayer }
-
-
+export { Ship, GameBoard, Player, ComputerPlayer };
