@@ -14,6 +14,7 @@ export const setPredeterminedShips = (player) => {
     player.board.setShipOnBoard(8, "F", 2, "vertical");
 };
 
+
 export const createAndReturnTableWithShips = (player) => {
     const tBody = document.createElement("tbody");  /// there should be only 1
     // const letterCoordinates = "ABCDEFGHIJ".split("");

@@ -23,6 +23,47 @@ const GameBoard = () => {
         
         
     };
+    const isSpaceAviableHorizontally = (startRow, startCol, length) => {
+        const startColIndex = letterCoordinates.indexOf(startCol);
+
+        for (let i = 0; i < length; i++) {
+            if (startColIndex + i >= 10 || ObjBoard[startRow][letterCoordinates[startColIndex + i]].length) {
+                return false;
+            };
+        };
+
+        return true;
+    };
+
+    const isSpaceAviableVertically = (startRow, startCol, length) => {
+        const startColIndex = letterCoordinates.indexOf(startCol);
+
+        for (let i = 0; i < length; i++) {
+            if (startRow + i >= 10 || ObjBoard[startRow + i][letterCoordinates[startColIndex]].length) {
+                return false;
+            };
+        };
+
+        return true;
+    };
+
+    const placeShipRandomly = (shipSize) => {
+        let placed = false;
+
+        while (!placed) {
+            const startRow = Math.floor(Math.random() * 10);
+            const startCol = letterCoordinates[Math.floor(Math.random() * 10)];
+            const randomOrientation = Math.random() > 0.5 ? "vertical" : "horiznontal";
+
+            if (randomOrientation === "vertical" && isSpaceAviableVertically(startRow, startCol, shipSize)) {
+                setShipOnBoardVertically(startRow, startCol, Ship(shipSize));
+                placed = true;
+            } else if (randomOrientation === "horiznontal" && isSpaceAviableHorizontally(startRow, startCol, shipSize)) {
+                setShipOnBoardHorizontally(startRow, startCol, Ship(shipSize));
+                placed = true;
+            };
+        }
+    }
     const setShipOnBoardHorizontally = (starRow, startCol, ship) => {
         // implement
         const startColIndex = letterCoordinates.indexOf(startCol);
@@ -58,6 +99,11 @@ const GameBoard = () => {
                 console.error("Wrong coordinates. Ship is not placed!");
                 return;
             };
+        },
+        setShipsRandomly: function (ships) {
+            ships.forEach(shipSize => {
+                placeShipRandomly(shipSize);
+            });
         },
         receiveAttack: function (coordinateNum, coordinateLetter) {
             // console.log(`CoordinateNum: ${coordinateNum}, CoordinateLetter: ${coordinateLetter}`);

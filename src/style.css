@@ -8,7 +8,7 @@
 body {
     display: grid;
     grid-template-rows: 0.5fr 2fr 0.5fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 0.2fr 1fr;
     height: 100vh;
 }
 
@@ -18,10 +18,25 @@ body {
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr 4fr 1fr;
 }
-
+.player1 {
+    grid-column: 1;
+}
+.player2 {
+    grid-column: 3;
+}
 
 #player1-footer, #player2-footer {
     grid-row: 3;
+}
+#player2-footer {
+    grid-column: 3;
+}
+
+#randomise-btn {
+    grid-row: 2;
+    grid-column: 2;
+    height: 2.5rem;
+    font-size: 0.8rem;
 }
 
 p {
@@ -111,6 +126,9 @@ td.battlefield-cell-miss>div::before {
 #myMessages, #opponentMessages {
     width: 100%;
 
+}
+#opponentMessages {
+    grid-column: 3;
 }
 
 #myMessages > p,
